@@ -89,7 +89,7 @@
 							<applicationName>craft-usermgtrestservicesdev</applicationName>
 							<environment>Sandbox</environment>
 							<properties>
-								<https.port>1443</https.port>
+							          	<https.port>1443</https.port>
 							</properties>
 						</cloudHubDeployment>
 					</configuration>
