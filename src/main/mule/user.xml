@@ -214,10 +214,26 @@ ns ns0 http://www.craftsoftware.com/users
 		<ee:transform doc:name="Transform Message" doc:id="f0cea5be-1bc8-43d0-b135-d496b33eae6b" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/jsonns ns0 http://www.craftsoftware.com/users
-
+output application/json 
+ns ns0 http://www.craftsoftware.com/users
 ---
-payload.body.ns0#GetAllUsersResponse]]></ee:set-payload>
+payload.body.ns0#GetAllUsersResponse  
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="e677c764-e812-48ff-ac58-748b8ad59e14" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[output application/json
+---
+ 
+ payload  mapObject ((item, index) -> {
+("Users " ++ (item.id)): {
+  	'id':item.id , 
+  	'firstName':item.fist,
+  	'department':item.department  
+  } 
+   
+} )]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
     </flow>
@@ -244,7 +260,7 @@ ns ns0 http://www.craftsoftware.com/users
 		<ee:transform doc:name="Transform Message" doc:id="2a6e354e-c8ea-441c-96ed-4d2aa9e8c67e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
+output application/json 
 ns ns0 http://www.craftsoftware.com/users
 ---
 payload.body.ns0#GetUserResponse]]></ee:set-payload>
