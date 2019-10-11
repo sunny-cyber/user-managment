@@ -62,7 +62,7 @@
 							<username>${anypoint.username}</username>
 							<password>${anypoint.password}</password>
 							<workerType>Micro</workerType>
-							<applicationName>craft-capstone-usermgt</applicationName>
+							<applicationName>craft-capstone-usermgtdev</applicationName>
 							<environment>Sandbox</environment>
 							<properties>
 								<https.port>1443</https.port>
