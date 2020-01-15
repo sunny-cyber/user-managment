@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="soapresponse" format="xml">
+      <types:example format="xml" element="{http://www.craftsoftware.com/users}GetAllUsersResponse" location="sample.xml"/>
+    </types:type>
+    <types:type name="jsonresponse" format="json">
+      <types:shape format="weave" example="samplejson.json"><![CDATA[%dw 2.0
+
+type jsonresponse = {|
+  Users: {|
+    id: String, 
+    fist: Null, 
+    department: String
+  |}
+|} {"example": "{\"Users\":{\"id\":\"9\",\"fist\":null,\"department\":\"IIB\"}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="json" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+    <types:type name="sampletwojson" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#f0cea5be-1bc8-43d0-b135-d496b33eae6b">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="soapresponse"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="jsonresponse"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

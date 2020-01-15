@@ -1,0 +1,114 @@
+
+https://developer.mulesoft.com/tutorials/quick-start/connecting-your-first-saas-application
+
+
+
+#%RAML 1.0
+version: 1
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/ac48f9a9-8558-4c1f-b79e-96deff50c25b/ # 
+title: User management-api
+types:
+  usermanagement: !include dataType.raml
+/users:
+  get:
+    description: "to get a list of all users"  
+    responses: 
+      200:
+       body: 
+        application/json:
+          type: usermanagement []
+          example: !include getallusers.json
+  post:
+    description: "to create all users we use post on main resource but no id" 
+    responses:
+      201:
+       body:
+        application/json:
+          type: usermanagement            
+          example: !include postuser.json
+  /{id}:                        
+    get:
+      description: "get user by id"
+      responses:
+       200:
+        body:
+          application/json:
+            type: usermanagement
+            example: !include getuserbyid.json
+    put:
+      description: "to update the existing user" 
+      responses:
+         200:
+          body:
+           application/json:
+             type: usermanagement
+             example: !include putalluser.json
+    delete:
+      description: "delete user by id" 
+      responses:
+       200:
+         body:
+           application/json:
+            type: usermanagement
+            example: !include deleteuser.json
+
+------------------------------------
+
+Putallusers.json
+
+{  "id": 1,
+  "firstName":"Bob",
+  "lastName":"Tedd",
+  "department":"Batch9"
+
+postUsersNoID.json
+
+{
+  "firstName":"Bob",
+  "lastName":"Tedd",
+  "department":"Batch9"
+}
+
+
+getuserbyid.json
+
+{ "id": 1,
+  "firstName":"Bob",
+  "lastName":"Tedd",
+  "department":"Batch9"
+  }
+
+               
+getallusers
+
+[{
+  "id":1,
+  "firstName":"Bob",
+  "lastName":"Tedd",
+  "department":"Batch9"
+  },
+{
+  "id": 2,
+  "firstName":"Hanna",
+  "lastName":"Bobu",
+  "department":"Batch9"
+  }]
+
+deleteuser.json
+
+{ "id":"1"
+  "firstName":"Bob",
+  "lastName":"Tedd",
+  "department":"Batch9"
+  }
+
+DataTaype.rml
+
+#%RAML 1.0 dataType
+
+type: object
+properties:
+  ID?: integer
+  firstName: string
+  lastName: string
+  department: string

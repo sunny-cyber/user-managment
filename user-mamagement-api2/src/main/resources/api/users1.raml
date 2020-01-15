@@ -1,0 +1,92 @@
+#%RAML 1.0
+title: users1
+
+/Users:
+    get:
+     description: Get all users
+     responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/alluser.json
+        404:
+            body:
+              application/json:
+                example: |
+                  user not found
+        500:
+            body:
+              application/json:
+                example: |
+                  server not found
+    post:      
+        description: Create user
+        body:
+              application/json:
+                example:
+                    !include Examples/post.json
+        responses:
+          201:
+            body:
+              application/json:
+                example:
+                  message: "user created"
+          401:
+                body:
+                  application/json:
+                    example: |
+                     Unauthorized to make changes
+          500:
+           body:
+            application/json:
+              example: |
+                server not responding
+    put:
+        description: update a single user
+        body:
+              application/json:
+                example:
+                  !include Examples/update.json      
+        responses:
+          200:
+            body:
+              application/json:
+                examples:
+                  message: user updated successfully
+          406:
+            body:
+              application/json:
+                example:
+                  message: user Id unacceptable
+    /{ID}:
+      get:
+        description: get a single user
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  !include Examples/userid.json
+          400:
+            body:
+              application/json:
+                example:
+                  message: Bad Request - Id is required
+      delete:
+       description: delete a single user
+       body:
+              application/json:
+                example:
+                  !include Examples/userid.json
+       responses:
+         200:
+           body:
+             application/json:
+                example:
+                  Successfully Removed      
+         401:
+            body:
+              application/json:
+                example:
+                   Unauthorized to make changes
