@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="user" format="json">
+      <types:shape format="weave" example="examples/sample.json"><![CDATA[%dw 2.0
+
+type user = Array<{|  id: Number {"typeId": "int"},   first: String,   last: String,   department: String|}> {"example": "[{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="post" format="json">
+      <types:shape format="weave" example="examples/post.json"><![CDATA[%dw 2.0
+
+type post = Array<{|  first: String,   last: String,   department: String|}> {"example": "[{\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#00340777-0155-462d-8598-c757152d1aea">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="user"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#42009944-7911-4058-b9ee-aa91c539b73c">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="post"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
